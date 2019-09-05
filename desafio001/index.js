@@ -6,20 +6,25 @@ server.use(express.json());
 
 const projects = [{id:"1", title: 'projeto1', tasks:['tarefa1', 'tarefa2']}]
 
-const _get = 0; const _put = 0; const _post = 0; const _delete = 0;
+var gget = 0; var pput = 0; var ppost = 0; var ddelete = 0;
+
 
 
 server.use((req,res, next) =>{
   
-  if (req.method == "get") {
-    ++_get;
+  if (req.method == 'GET') {
+   
+   
+  }; 
+
+  switch (req.method) {
+    case 'GET': gget = gget +1; break;
+    case 'PUT': pput = pput +1; break;
+    case 'POST': ppost = ppost +1; break;
+    case 'DELETE': ddelete = ddelete +1; break;
   }
-
-  console.log(req.method);
-  console.log(_get);
-  
+  console.log(`Contagem de Métodos: GET : ${gget}, PUT : ${pput}, POST : ${ppost}, DELETE : ${ddelete}. No total: ${gget+pput+ppost+ddelete}`);
   next();
-
 });
 
 function checkIDInArray(req,res,next){
